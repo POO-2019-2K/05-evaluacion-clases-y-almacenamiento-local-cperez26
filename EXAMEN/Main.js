@@ -1,34 +1,37 @@
 import Productos from "./Productos.js";
-import Producto from "./Producto.js";
-
+import Producto from "./productos.js";
 
 class Main {
-  constructor() {
-    document.querySelector("#btn").addEventListener("click", () => {
-      let producto = document.querySelector("#producto");
+    constructor() {
+        let inventario = new Productos(
+            document.querySelector("#inventario"),
+            document.querySelector("info")
+        );
 
-      if (producto.checkValidity() === true) {
-        let numProducto = document.querySelector("#numero").value;
-        let name = document.querySelector("#nombre").value;
-        let cantidad = document.querySelector("#cantidad").value;
-        let precio = document.querySelector("#precio").value;
+        document.querySelector("#btn").addEventListener("click", () => {
+            let form = document.querySelector("form");
 
-        
+            if (form.checkValidity() == true) {
+                let nProducto = document.querySelector("numero");
+                let nombre = document.querySelector("#nombre");
+                let cantidad = document.querySelector("#cantidad");
+                let costo = document.querySelector("#precio");
 
-        let objProducto = {
-          number : numProducto,  
-          name: name,
-          cantidad: cantidad,
-          precio: precio
-        };
+                let objProducto = {
+                    numProducto: numProducto,
+                    nombre: nombre,
+                    cantidad: cantidad,
+                    precio: precio,
+                };
 
-        let productos = new Productos(objProducto);
+                let producto = new Producto(objProducto);
 
-        productos.addProducto(producto);
-      }
+                inventario.addProducto(producto);
+            }
+            form.classList.add("was-validated")
+        });
 
-    });
-  }
+    }
 }
 
 let m = new Main();
